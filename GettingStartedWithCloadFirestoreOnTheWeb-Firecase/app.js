@@ -37,6 +37,7 @@ loadButton.addEventListener('click', () => {
         if(documentSnapshot && documentSnapshot.exists) {
             const myDocResult = documentSnapshot.data();
             console.log('documentSnapshot', myDocResult.hotDogStatus);
+            outputHeader.innerText = `Hot dog status: ${ myDocResult.hotDogStatus }`;
         }
     }).catch((error) => {
         console.log('An error occured', error);
