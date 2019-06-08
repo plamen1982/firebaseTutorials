@@ -46,10 +46,10 @@ loadButton.addEventListener('click', () => {
 
 getRealtimeUpdates = () => {
     //onSnapshot is real time event listener for changes in the database in our firebase
-    documentSandwichReference.onSnapshot((documentSnapshot) => {
+    documentSandwichReference.onSnapshot({ includesMetadataChanges: true }, (documentSnapshot) => {
         if(documentSnapshot && documentSnapshot.exists) {
             const myDocResult = documentSnapshot.data();
-            console.log('documentSnapshot', myDocResult.hotDogStatus);
+            console.log('documentSnapshot', myDocResult);
             outputHeader.innerText = `Hot dog status: ${ myDocResult.hotDogStatus }`;
         }
     });
