@@ -43,3 +43,16 @@ loadButton.addEventListener('click', () => {
         console.log('An error occured', error);
     });
 });
+
+getRealtimeUpdates = () => {
+    //onSnapshot is real time event listener for changes in the database in our firebase
+    documentSandwichReference.onSnapshot((documentSnapshot) => {
+        if(documentSnapshot && documentSnapshot.exists) {
+            const myDocResult = documentSnapshot.data();
+            console.log('documentSnapshot', myDocResult.hotDogStatus);
+            outputHeader.innerText = `Hot dog status: ${ myDocResult.hotDogStatus }`;
+        }
+    });
+}
+
+getRealtimeUpdates();
