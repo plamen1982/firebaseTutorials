@@ -45,11 +45,14 @@ loadButton.addEventListener('click', () => {
 });
 
 getRealtimeUpdates = () => {
-    //onSnapshot is real time event listener for changes in the database in our firebase
-    documentSandwichReference.onSnapshot({ includesMetadataChanges: true }, (documentSnapshot) => {
-        if(documentSnapshot && documentSnapshot.exists) {
+    //onSnapshot is real time event listener for changes in the database in our firebase, as a first argument we can add 
+    //{ includeMetadataChanges: true }, is an option if is set to true, onSpanshot event is going to be called again when we receive documentSnapshot from the firestore
+    //and we have property documentSnapshot.metadata.hasPendingWrites when is false it means that this data is comming from firebase 
+    //and is not a local copy
+    documentSandwichReference.onSnapshot({ includeMetadataChanges: true }, (documentSnapshot) => {
+        if(documentSnapshot && documentSnapshot.exists && !documentSnapshot.metadata.hasPendingWrites) {
             const myDocResult = documentSnapshot.data();
-            console.log('documentSnapshot', myDocResult);
+            console.log('documentSnapshot is comming from the database', myDocResult);
             outputHeader.innerText = `Hot dog status: ${ myDocResult.hotDogStatus }`;
         }
     });
