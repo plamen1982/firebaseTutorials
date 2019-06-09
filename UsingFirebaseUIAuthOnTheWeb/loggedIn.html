@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase.js"></script> 
+</head>
+<body>
+
+    <script>
+        const config = {
+            apiKey: 'AIzaSyD6UUhwbjBO1o5Ny5epzxdLQItRZYW7PZk',
+            authDomain: 'ishotdogasandwich-test.firebaseapp.com',
+            databaseURL: 'https://ishotdogasandwich-test.firebaseio.com',
+            projectId: 'ishotdogasandwich-test',
+            storageBucket: 'ishotdogasandwich-test.appspot.com',
+            messagingSenderId: '182270411429'
+        };
+    
+        firebase.initializeApp(config);
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user) {
+                document.body.innerHTML = `<h1>Congrats ${user.displayName}, you are singedIn</h1><h2>Your email is: ${user.email}</h2>`
+            } else {
+                console.log('no user signed in');
+            }
+        });
+    </script>
+</body>
+</html>
